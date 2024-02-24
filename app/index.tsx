@@ -4,32 +4,45 @@ import TopAppBar from '../assets/topAppBar';
 import { useEffect } from 'react';
 import BotAppBar from '../assets/botAppBar';
 
-const windowHeight = Dimensions.get('window').height; // export this 
-const windowWidth = Dimensions.get('window').width;
-
+export const windowHeight = Dimensions.get('window').height;
+export const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
         display: 'flex',
-        width: '100%',
+        flex: 1,
+        width: windowWidth,
         height: windowHeight,
+        position: 'relative'
     },
-    text: {
-        marginTop: windowHeight - (windowHeight - 160),
+    body: {
+        height: '67%'
+    },
+    topAppBar: {
+        height: '22%'
+    },
+    botAppBar: {
+        height: '15%'
     }
 });
 
 const index = () => {
-
     useEffect(() => {
         StatusBar.setBackgroundColor('#E5E178');
+        StatusBar.setBarStyle('light-content');
     }, [])
 
     return (
         <View style={styles.container}>
-            <TopAppBar viewBox={`0 0 360 ${windowHeight}`} />
-            <Text style={styles.text}>Test</Text>
-            <BotAppBar viewBox={`0 0 360 ${windowHeight}`} />
+            <View style={styles.topAppBar}>
+                <TopAppBar viewBox={`0 0 360 ${windowHeight}`} />
+            </View >
+            <View style={styles.body}>
+                <Text>Test</Text>
+            </View>
+            <View style={styles.botAppBar}>
+                <BotAppBar viewBox={`0 0 360 ${windowHeight}`} />
+            </View >
         </View >
     )
 };

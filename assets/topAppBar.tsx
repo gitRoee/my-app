@@ -11,9 +11,7 @@ const TopAppBar = (props: SvgProps) => (
   <Svg
     fill="none"
     preserveAspectRatio="xMinYMin slice"
-    style={{
-      position: 'absolute', top: 0, zIndex: 0
-    }}
+
     {...props}
   >
     <G clipPath="url(#a)">

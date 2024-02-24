@@ -1,12 +1,8 @@
 import * as React from "react"
-import { Dimensions } from "react-native";
 import Svg, { SvgProps, Path } from "react-native-svg"
-const windowHeight = Dimensions.get('window').height; // index assets and send the same props to each svg
 
 const BotAppBar = (props: SvgProps) => (
-    <Svg {...props} fill="none" preserveAspectRatio="xMinYMin slice" style={{
-        position: 'absolute', top: windowHeight - 118, zIndex: 0
-    }}>
+    <Svg {...props} fill="none" preserveAspectRatio="xMinYMin slice">
         <Path fill="#E5E178" d="M0 0h360v86H0z" />
         <Path fill="#fff" d="M360 0H0v11h71l66 6 93-3 130-3V0Z" />
         <Path
