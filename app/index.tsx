@@ -50,7 +50,6 @@ const index = () => {
             </View >
             <View style={styles.body}>
                 <ScrollViewIndicator indStyle={styles.scrollview}>
-
                 </ScrollViewIndicator>
             </View>
             <View style={styles.botAppBar}>
