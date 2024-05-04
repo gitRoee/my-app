@@ -2,10 +2,11 @@ import { Dimensions, StatusBar, View, StyleSheet, DimensionValue } from 'react-n
 import TopAppBar from '../assets/topAppBar';
 import { useEffect } from 'react';
 import BotAppBar from '../assets/botAppBar';
-import { ScrollViewIndicator } from '@fanchenbao/react-native-scroll-indicator';
+import AppBody from './components/AppBody';
+import Portal from './hooks/usePortal';
 
-export const windowHeight = Dimensions.get('window').height;
-export const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 const bodyHeight: DimensionValue = windowHeight * 0.67;
 const topAppBarHeight: DimensionValue = windowHeight * 0.22;
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5E178',
     },
 });
+
 const index = () => {
     useEffect(() => {
         StatusBar.setBackgroundColor('#E5E178');
@@ -44,18 +46,19 @@ const index = () => {
 
 
     return (
-        <View style={styles.container}>
-            <View style={styles.topAppBar}>
-                <TopAppBar viewBox={`0 0 360 ${windowHeight}`} />
+        <Portal>
+            <View style={styles.container}>
+                <View style={styles.topAppBar}>
+                    <TopAppBar viewBox={`0 0 360 ${windowHeight}`} />
+                </View>
+                <View style={styles.body}>
+                    <AppBody />
+                </View>
+                <View style={styles.botAppBar}>
+                    <BotAppBar viewBox={`0 0 360 ${windowHeight}`} />
+                </View >
             </View >
-            <View style={styles.body}>
-                <ScrollViewIndicator indStyle={styles.scrollview}>
-                </ScrollViewIndicator>
-            </View>
-            <View style={styles.botAppBar}>
-                <BotAppBar viewBox={`0 0 360 ${windowHeight}`} />
-            </View >
-        </View >
+        </Portal>
     )
 };
 
