@@ -4,6 +4,7 @@ import { usePortalContext } from '../hooks/usePortal';
 import { useState } from 'react';
 import CustomDropdown from './Dropdown';
 import EditIcon from '../../assets/editIcon';
+import React from 'react';
 
 const windowHeight = Dimensions.get('window').height;
 const containerH = windowHeight * 0.2;

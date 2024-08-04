@@ -3,6 +3,7 @@ import AddIcon from '../../assets/addIcon';
 import { usePortalContext } from '../hooks/usePortal';
 import { useState } from 'react';
 import AddCardModal from './AddCardModal';
+import React from 'react';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;

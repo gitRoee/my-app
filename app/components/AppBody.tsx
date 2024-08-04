@@ -2,6 +2,7 @@ import { View, StyleSheet, Dimensions } from "react-native";
 import AddIcon from "../../assets/addIcon";
 import CardsContainer from "./CardsContainer";
 import BottomContainer from "./BottomContainer";
+import React from "react";
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
