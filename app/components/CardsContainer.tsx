@@ -29,6 +29,8 @@ const CardsContainer = () => {
             <AmIAllowedCard />
             <AmIAllowedCard />
             <AmIAllowedCard />
+            {/* {!isLast && <View style={styles.divider} />} */}
+
         </View>
     )
 };

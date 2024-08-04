@@ -38,4 +38,4 @@ const Portal = ({ children }: props) => {
 
 export default Portal;
 
-export const usePortal = () => useContext(PortalContext);
+export const usePortalContext = () => useContext(PortalContext);

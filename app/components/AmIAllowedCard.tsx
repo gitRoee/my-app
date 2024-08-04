@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
 });
 
 type props = {
-    isLastCard: boolean;
     allowedDate: Date;
     coolDown: number
 }
@@ -66,9 +65,7 @@ type props = {
 // possibly use memo on this
 
 const AmIAllowedCard = () => {
-    const isLast = false;
     const isAllowed = false;
-
 
     //todo simple date logic calc
 
@@ -101,43 +98,40 @@ const AmIAllowedCard = () => {
     const composed = Gesture.Exclusive(flingGestureLeft, flingGestureRight)
 
     return (
-        <>
-            <GestureDetector gesture={composed}>
-                <View style={styles.viewWrapper}>
-                    <View style={{ ...styles.chosenIndication }} />
-                    <Animated.View
-                        style={{ ...styles.cardContainer, transform: [{ translateX: touch }] }}
-                    >
+        <GestureDetector gesture={composed}>
+            <View style={styles.viewWrapper}>
+                <View style={{ ...styles.chosenIndication }} />
+                <Animated.View
+                    style={{ ...styles.cardContainer, transform: [{ translateX: touch }] }}
+                >
+                    {
+                        isAllowed ? <AllowedIcon /> : <NotAllowedIcon />
+                    }
+                    <View style={styles.textContainer}>
+                        <Text style={styles.cardTitle}>
+                            Title
+                        </Text>
+                        <Text style={styles.cardText}>
+                            Once A Day
+                        </Text>
+                    </View>
+                    <Pressable style={styles.cardActions}>
                         {
-                            isAllowed ? <AllowedIcon /> : <NotAllowedIcon />
+                            isAllowed ?
+                                <RightArrowIcon /> :
+                                <AnimatedCircularProgress
+                                    size={40}
+                                    width={5}
+                                    fill={30}
+                                    tintColor="#CEBE2F"
+                                    onAnimationComplete={() => console.log('onAnimationComplete')}
+                                    backgroundColor="#B3CEBE2F"
+                                />
                         }
-                        <View style={styles.textContainer}>
-                            <Text style={styles.cardTitle}>
-                                Title
-                            </Text>
-                            <Text style={styles.cardText}>
-                                Once A Day
-                            </Text>
-                        </View>
-                        <Pressable style={styles.cardActions}>
-                            {
-                                isAllowed ?
-                                    <RightArrowIcon /> :
-                                    <AnimatedCircularProgress
-                                        size={40}
-                                        width={5}
-                                        fill={30}
-                                        tintColor="#CEBE2F"
-                                        onAnimationComplete={() => console.log('onAnimationComplete')}
-                                        backgroundColor="#B3CEBE2F"
-                                    />
-                            }
-                        </Pressable>
-                    </Animated.View>
-                </View>
-            </GestureDetector >
-            {!isLast && <View style={styles.divider} />}
-        </>
+                    </Pressable>
+                </Animated.View>
+            </View>
+        </GestureDetector >
     )
 };
 

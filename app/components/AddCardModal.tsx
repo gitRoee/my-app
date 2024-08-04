@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, TextInput, Dimensions } from 'react-native';
 import Modal from 'react-native-modal/dist/modal';
-import { usePortal } from '../hooks/usePortal';
+import { usePortalContext } from '../hooks/usePortal';
 import { useState } from 'react';
 import CustomDropdown from './Dropdown';
 import EditIcon from '../../assets/editIcon';
@@ -43,16 +43,16 @@ const styles = StyleSheet.create({
         color: '#CEBE2F',
     },
     actionContainer: {
-        marginTop: 20,
+        marginTop: 10,
         alignSelf: 'flex-end'
     }
 });
 
 const AddCardModal = () => {
-    // todo create container for forms
-    const { closeModal } = usePortal();
+    const { closeModal } = usePortalContext();
     const [text, setText] = useState('');
-    // const [selectedValue, setSelectedValue] = useState("option1");
+    const [selectedTimeUnit, setSelectedTimeUnit] = useState("1");
+    const [selectedTimePeriod, setSelectedTimePeriod] = useState('Day');
 
     return (
         <Modal isVisible backdropOpacity={0} onBackdropPress={closeModal} avoidKeyboard>
@@ -67,8 +67,8 @@ const AddCardModal = () => {
                 </View>
                 <View style={styles.scheduleContainer}>
                     <Text style={styles.textLabel}>Once</Text>
-                    <CustomDropdown options={['2', '1']} defaultValue={'1'} />
-                    <CustomDropdown options={['Days', 'Months']} defaultValue={'Days'} />
+                    <CustomDropdown options={['2', '1']} onSelect={(option) => setSelectedTimeUnit(option)} selectedOption={selectedTimeUnit} />
+                    <CustomDropdown options={['Days', 'Months']} onSelect={(option) => setSelectedTimePeriod(option)} selectedOption={selectedTimePeriod} />
                 </View>
                 <View style={styles.actionContainer}>
                     <EditIcon />

@@ -4,22 +4,20 @@ import Modal from "react-native-modal";
 
 type props = {
     options: string[],
-    onSelect?: VoidFunction,
-    defaultValue: string,
+    onSelect: (option: string) => void,
+    selectedOption: string;
 }
 const windowWidth = Dimensions.get('window').width;
 
-const CustomDropdown = ({ options, onSelect, defaultValue }: props) => {
+const CustomDropdown = ({ options, onSelect, selectedOption }: props) => {
     const [isVisible, setIsVisible] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(defaultValue || options[0]);
 
     const toggleModal = () => {
         setIsVisible(!isVisible);
     };
 
     const handleOptionSelect = (option: string) => {
-        setSelectedOption(option);
-        // onSelect(option);
+        onSelect(option);
         toggleModal();
     };
 

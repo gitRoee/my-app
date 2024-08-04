@@ -1,6 +1,6 @@
 import { View, StyleSheet, Dimensions, Pressable } from 'react-native';
 import AddIcon from '../../assets/addIcon';
-import { usePortal } from '../hooks/usePortal';
+import { usePortalContext } from '../hooks/usePortal';
 import { useState } from 'react';
 import AddCardModal from './AddCardModal';
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
 const BottomContainer = () => {
 
-    const { setModal, closeModal } = usePortal();
+    const { setModal } = usePortalContext();
     const [text, setText] = useState('');
 
     return (
