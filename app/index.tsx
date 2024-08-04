@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import BotAppBar from '../assets/botAppBar';
 import AppBody from './components/AppBody';
 import Portal from './hooks/usePortal';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: windowWidth,
         height: windowHeight,
-        position: 'relative'
+        position: 'relative',
     },
     body: {
         display: 'flex',
@@ -47,7 +48,7 @@ const index = () => {
 
     return (
         <Portal>
-            <View style={styles.container}>
+            <GestureHandlerRootView style={styles.container} >
                 <View style={styles.topAppBar}>
                     <TopAppBar viewBox={`0 0 360 ${windowHeight}`} />
                 </View>
@@ -57,7 +58,7 @@ const index = () => {
                 <View style={styles.botAppBar}>
                     <BotAppBar viewBox={`0 0 360 ${windowHeight}`} />
                 </View >
-            </View >
+            </GestureHandlerRootView>
         </Portal>
     )
 };

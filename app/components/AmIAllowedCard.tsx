@@ -4,7 +4,7 @@ import AllowedIcon from "../../assets/allowedIcon";
 import RightArrowIcon from "../../assets/RightArrowIcon";
 import NotAllowedIcon from "../../assets/notAllowedIcon";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { Directions, Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler'
+import { Directions, Gesture, GestureDetector } from 'react-native-gesture-handler'
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -73,6 +73,7 @@ const AmIAllowedCard = () => {
 
     const flingGestureRight = Gesture
         .Fling()
+        .runOnJS(true)
         .shouldCancelWhenOutside(true)
         .direction(Directions.RIGHT)
         .onEnd(() => {
@@ -85,6 +86,7 @@ const AmIAllowedCard = () => {
 
     const flingGestureLeft = Gesture
         .Fling()
+        .runOnJS(true)
         .shouldCancelWhenOutside(true)
         .direction(Directions.LEFT)
         .onEnd(() => {
@@ -98,42 +100,40 @@ const AmIAllowedCard = () => {
     const composed = Gesture.Exclusive(flingGestureLeft, flingGestureRight)
 
     return (
-        <GestureHandlerRootView>
-            <GestureDetector gesture={composed}>
-                <View style={styles.viewWrapper}>
-                    <View style={{ ...styles.chosenIndication }} />
-                    <Animated.View
-                        style={{ ...styles.cardContainer, transform: [{ translateX: touch }] }}
-                    >
+        <GestureDetector gesture={composed}>
+            <View style={styles.viewWrapper}>
+                <View style={{ ...styles.chosenIndication }} />
+                <Animated.View
+                    style={{ ...styles.cardContainer, transform: [{ translateX: touch }] }}
+                >
+                    {
+                        isAllowed ? <AllowedIcon /> : <NotAllowedIcon />
+                    }
+                    <View style={styles.textContainer}>
+                        <Text style={styles.cardTitle}>
+                            Title
+                        </Text>
+                        <Text style={styles.cardText}>
+                            Once A Day
+                        </Text>
+                    </View>
+                    <Pressable style={styles.cardActions}>
                         {
-                            isAllowed ? <AllowedIcon /> : <NotAllowedIcon />
+                            isAllowed ?
+                                <RightArrowIcon /> :
+                                <AnimatedCircularProgress
+                                    size={40}
+                                    width={5}
+                                    fill={30}
+                                    tintColor="#CEBE2F"
+                                    onAnimationComplete={() => console.log('onAnimationComplete')}
+                                    backgroundColor="#B3CEBE2F"
+                                />
                         }
-                        <View style={styles.textContainer}>
-                            <Text style={styles.cardTitle}>
-                                Title
-                            </Text>
-                            <Text style={styles.cardText}>
-                                Once A Day
-                            </Text>
-                        </View>
-                        <Pressable style={styles.cardActions}>
-                            {
-                                isAllowed ?
-                                    <RightArrowIcon /> :
-                                    <AnimatedCircularProgress
-                                        size={40}
-                                        width={5}
-                                        fill={30}
-                                        tintColor="#CEBE2F"
-                                        onAnimationComplete={() => console.log('onAnimationComplete')}
-                                        backgroundColor="#B3CEBE2F"
-                                    />
-                            }
-                        </Pressable>
-                    </Animated.View>
-                </View>
-            </GestureDetector >
-        </GestureHandlerRootView>
+                    </Pressable>
+                </Animated.View>
+            </View>
+        </GestureDetector >
     )
 };
 
